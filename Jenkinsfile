@@ -4,21 +4,20 @@ node('slave_jenkins') {
     /* On utilise l'image Terraform que l'on a stocké sur le Dockerhub correspondant
     Pour résumer, notre chef d'ochestre donne l'ordre à son assistant d'aller dans l'atelier,
     et de bricoler avec les outils qu'il lui a mis à disposition */
-    docker.image('mounabal/terraform_12.21:terraform').inside() {
-        
+    docker.image('mounabal/image_terraform:terraform').inside() {
+
         //on recupere le git qui contient les fichiers Terraform nécessaires au projet
         stage('Copie des fichiers Terraform dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
             sh "cd terraform_appli"
         }
+               
         
         stage('Terraform Init, Plan & Apply'){
-        //On init 
             withCredentials([file(credentialsId: 'backend', variable: 'test')]) {
-                sh "terraform -v"
+                // On initialise
                 sh "terraform init"
-                //sh "terraform plan -var 'env=toto' -var-file=\$test -out terraplante"
-                sh 'terraform plan -out=toto -var-file=main.tfvars -var-file=$test'
+                sh 'terraform plan -out=toto -var-file=main.tfvars -out terraplante"
                 sh "terraform apply terraplante"
             }
         }
