@@ -35,7 +35,7 @@ resource "azurerm_subnet" "subnet_test" {
 resource "azurerm_network_security_group" "NSG_test" {
     name = "NSG_test"
     location = "${var.location}"
-    resource_group_name = "${data.azurerm_resource_group.RGapp.name}"
+    resource_group_name = "${azurerm_resource_group.RGapp.name}"
     
     security_rule {
         name                       = "SSH"
@@ -101,7 +101,7 @@ resource "azurerm_network_security_group" "NSG_test" {
 resource "azurerm_public_ip" "IP_test" {
     name                         = "IP_test"
     location                     = "${var.location}"
-    resource_group_name          = "${data.azurerm_resource_group.RGapp.name}"
+    resource_group_name          = "${azurerm_resource_group.RGapp.name}"
     allocation_method            = "Static"
     
 }
@@ -174,7 +174,7 @@ resource "azurerm_virtual_machine" "Test" {
 resource "azurerm_network_security_group" "NSG_BDDtest" {
     name = "NSG_BDDtest"
     location = "${var.location}"
-    resource_group_name = "${data.azurerm_resource_group.RGapp.name}"
+    resource_group_name = "${azurerm_resource_group.RGapp.name}"
     
     security_rule {
         name                       = "SSH"
