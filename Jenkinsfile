@@ -13,10 +13,6 @@ node('slave_jenkins') {
         stage('Terraform Init, Plan & Apply'){
             withCredentials([file(credentialsId: 'backend', variable: 'LouBega')]) {
                 // On initialise
-                sh 'ls -la'
-                sh 'pwd'
-                sh 'terraform -v'
-                sh 'rm -f terraform.tfstate'
                 sh "terraform init"
                 sh 'terraform plan -auto-approve -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
                 sh 'terraform apply terraplante'
