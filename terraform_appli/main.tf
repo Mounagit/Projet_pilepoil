@@ -16,10 +16,10 @@ data "azurerm_virtual_network" "my_AzureVnet" {
 }
 
 # création du subnet 
-data "azurerm_subnet" "subnet_test" {
+resource "azurerm_subnet" "subnet_test" {
     name = "subnet_test"
-    resource_group_name = "${data.azurerm_resource_group.RGapp.name}"
-    virtual_network_name = "${data.azurerm_virtual_network.my_AzureVnet.name}"
+    resource_group_name = "${azurerm_resource_group.RGapp.name}"
+    virtual_network_name = "${azurerm_virtual_network.my_AzureVnet.name}"
     #address_prefix = "10.0.3.0/24"
 }
 
