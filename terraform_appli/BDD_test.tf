@@ -76,7 +76,7 @@ resource "azurerm_network_interface" "NIC_BDDtest" {
 
     ip_configuration {
         name                          = "IPconfBDDtest"
-        subnet_id                     = "${azurerm_subnet.subnet_test.id}"
+        subnet_id                     = "${data.azurerm_subnet.subnet_test.id}"
         private_ip_address_allocation = "Static"
         private_ip_address            = "10.0.3.6"
     
