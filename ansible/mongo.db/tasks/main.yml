@@ -1,0 +1,58 @@
+---
+# tasks file for mongo.db
+
+- name: supprimer mongo present
+  yum:
+   name: mongo
+   state: absent
+
+- name: create a repository
+  file:
+   path: /etc/yum.repos.d/mangodb.org.repo
+   state: touch
+
+- name: complete file
+  lineinfile:
+   path: /etc/yum.repos.d/mangodb.org.repo
+   line: "{{item}}"
+  with_items:
+   - "[mongodb-org-4.0]"
+   - name=MongoDB Repository
+   - baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+   - gpgcheck=1
+   - enabled=1
+   - gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+ 
+- name: mise à jour package
+  yum: 
+   name: '*'
+   state: latest
+   update_cache: yes
+
+  
+- name: install the mongodb-org meta-package
+  yum: 
+   name: mongodb-org
+   state: present 
+  
+- name: systemctl start mongod
+  systemd:
+   state: restarted
+   name: mongod
+   enabled: yes
+
+- mongodb_user:
+   database: admin
+   name: root
+   password: w32jjYdMZr
+   roles: readWrite
+   state: present
+
+
+
+
+
+
+
+    
+   

@@ -1,0 +1,11 @@
+---
+- hosts: slave
+  become: yes
+  roles: 
+    - java8
+    - git
+    - jenkins
+    - terraform
+    - maven
+    - ansible
+    - docker
