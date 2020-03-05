@@ -9,7 +9,7 @@ node('slave_jenkins') {
             sh "mv ./terraform_appli/* ."
         }
                
-        // 
+        // On initialise, on planifie, on applique, après bien des aventures
         stage('Terraform Init, Plan & Apply'){
             withCredentials([file(credentialsId: 'backend', variable: 'LouBega')]) {
                 // On initialise
@@ -22,23 +22,24 @@ node('slave_jenkins') {
         // Récupération du projet corrigé sur notre git
         stage('Clone du git du projet'){       
             git url: 'https://github.com/Mounagit/Code_Source.git'
-        }
+        } 
+    }
+
+    // Construction du jar avec Maven
+    stage('Build jar code source') {
+        sh "mvn clean package"
+    }
         
-        // Construction du jar avec Maven
-        stage('Build jar code source') {
-            sh "mvn clean package"
-        }
+    stage('On lance les tests Junit sur le jar') {
+        junit '**/target/surefire-reports/TEST-*.xml'
+        archiveArtifacts 'target/*.jar'
+    }
         
-        stage('On lance les tests Junit sur le jar') {
-            junit '**/target/surefire-reports/TEST-*.xml'
-            archiveArtifacts 'target/*.jar'
-        }
-        
-        stage('On récupère le tout en le poussant sur notre serveur') {
-            withCredentials([sshUserPrivateKey(credentialsId: 'slave_jenkins', keyFileVariable: 'Key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
-                sh "scp -i \$key -o StrictHostKeyChecking=no target/restfulweb-1.0.0-SNAPSHOT.jar MounaSylvain@mounasylvain.francecentral.cloudapp.azure.com:/home/MounaSylvain"
-            }  
-        }
+    stage('On récupère le tout en le poussant sur notre serveur') {
+        withCredentials([sshUserPrivateKey(credentialsId: 'slave_jenkins', keyFileVariable: 'Key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
+            sh "scp -i \$key -o StrictHostKeyChecking=no target/restfulweb-1.0.0-SNAPSHOT.jar MounaSylvain@mounasylvain.francecentral.cloudapp.azure.com:/home/MounaSylvain"
+        }  
+    }
     
         // On passe à la partie Ansible
    /*     stage('Deploiement Ansible') {
@@ -51,9 +52,9 @@ node('slave_jenkins') {
                     credentialsId: 'slave'
                 )
         }*/
-
-    }
-
+    
+    
+    
 }
 
 
