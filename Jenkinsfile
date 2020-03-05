@@ -1,5 +1,7 @@
 // Lancement des jobs sur la machine slave_jenkins
 node('slave_jenkins') {
+    
+    def registryCredential = "dockerhub"
 
     // Récupération du projet corrigé sur notre git :
     stage('Clone du git du projet'){       
