@@ -18,7 +18,7 @@ node('slave_jenkins') {
                 // On initialise
                 sh "terraform init"
                 sh 'terraform plan -auto-approve -var-file="main.tfvars" -var-file="test" -out=terraplante'
-                sh "terraform apply terraplante
+                sh 'terraform apply terraplante'
             }
         }
 
