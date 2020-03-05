@@ -34,7 +34,7 @@ node('slave_jenkins') {
         stage('Terraform Init, Plan & Apply'){
                 //On init 
                 withCredentials([file(credentialsId: 'backend', variable: 'test')]) {
-                sh "terraform -version"
+                sh "terraform -v"
                 sh "terraform init"
                 //sh "terraform plan -var 'env=toto' -var-file=\$test -out terraplante"
                 sh 'terraform plan -out=toto -var-file=main.tfvars -var-file=$test'
