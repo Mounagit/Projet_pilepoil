@@ -15,7 +15,9 @@ node('slave_jenkins') {
                 // On initialise
                 sh 'ls -la'
                 sh 'pwd'
-                sh "terraform init -var-file=main.tfvars -var-file=$LouBega"
+                sh 'terraform -v'
+                sh 'rm -f terraform.tfstate'
+                sh "terraform init"
                 sh 'terraform plan -auto-approve -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
                 sh 'terraform apply terraplante'
             }
