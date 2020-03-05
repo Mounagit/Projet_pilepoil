@@ -13,7 +13,6 @@ node('slave_jenkins') {
         stage('Terraform Init, Plan & Apply'){
             withCredentials([file(credentialsId: 'backend', variable: 'LouBega')]) {
                 // On initialise
-                sh 'destroy -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
                 sh 'terraform init'
                 sh 'terraform plan -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
                 sh 'terraform apply -auto-approve terraplante'
