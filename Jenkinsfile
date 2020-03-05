@@ -53,7 +53,7 @@ node('slave_jenkins') {
         }
         
     }
-}
+
 
 
 
