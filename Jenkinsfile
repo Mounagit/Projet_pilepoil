@@ -15,8 +15,8 @@ node('slave_jenkins') {
                 // On initialise
                 sh """
                 cd terraform_appli
-                terraform init'
-                terraform plan -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
+                terraform init
+                terraform plan -var-file=main.tfvars -var-file=$LouBega -out=terraplante
                 terraform apply terraplante
                 """
             }
