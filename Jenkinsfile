@@ -44,8 +44,8 @@ node('slave_jenkins') {
    
    /*     stage(''){
             sh "terraform apply terraplante"
-        }
-    } */
+        }*/
+    }
 
 
  /*   // On utilise l'image Ansible que l'on a stocké sur le Dockerhub correspondant        
@@ -65,11 +65,11 @@ node('slave_jenkins') {
                     hostKeyChecking: false,
                     credentialsId: 'slave'
                 )
-        } */
+        }
         
-    }
+    } */
 
-
+}
 
 
 
