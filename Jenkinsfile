@@ -2,7 +2,7 @@
 node('slave_jenkins') {
 
     // On utilise l'image Terraform que l'on a stocké sur le Dockerhub correspondant
-    docker.image('mounabal/my_terraform:latest').inside() {
+    docker.image('mounabal/projetdevops:latest').inside() {
         // On récupère le git qui contient les fichiers Terraform nécessaires au projet
         stage('Copie des fichiers Terraform dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
