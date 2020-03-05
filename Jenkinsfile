@@ -9,7 +9,7 @@ node('slave_jenkins') {
         //on recupere le git qui contient les fichiers Terraform nécessaires au projet
         stage('Copie des fichiers Terraform dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
-            sh "cd terraform_appli"
+            sh "cd ./terraform_appli"
             sh "ls"
         }
                
