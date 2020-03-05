@@ -89,7 +89,7 @@ resource "azurerm_network_interface" "NIC_BDDprod" {
 
     ip_configuration {
         name                          = "ipconfBDDprod"
-        subnet_id                     = "${azurerm_subnet.subnet_prod.id}"
+        subnet_id                     = "${data.azurerm_subnet.subnet_prod.id}"
         private_ip_address_allocation = "Static"
         private_ip_address            = "10.0.2.6"
        
