@@ -4,7 +4,7 @@
 resource "azurerm_network_security_group" "NSG_test" {
     name = "NSG_test"
     location = "${var.location}"
-    resource_group_name = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name = "RG_project"
     
     security_rule {
         name                       = "SSH"
@@ -70,7 +70,7 @@ resource "azurerm_network_security_group" "NSG_test" {
 resource "azurerm_public_ip" "IP_test" {
     name                         = "IP_test"
     location                     = "${var.location}"
-    resource_group_name          = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name          = "RG_project"
     allocation_method            = "Static"
     
 }
@@ -80,7 +80,7 @@ resource "azurerm_public_ip" "IP_test" {
 resource "azurerm_network_interface" "NIC_test" {
     name                      = "NIC_test"
     location                  = "${var.location}"
-    resource_group_name       = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name       = "RG_project"
     network_security_group_id = "${azurerm_network_security_group.NSG_test.id}"   
 
     ip_configuration {
