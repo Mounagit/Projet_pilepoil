@@ -5,6 +5,16 @@ data "azurerm_resource_group" "RGapp" {
     #location = "${var.location}"
 }
 
+# création du Azure Vnet 
+
+data "azurerm_virtual_network" "my_AzureVnet" {
+    name = "${var.nameVnet}" 
+    #address_space = [ "10.0.0.0/16" ]
+    #location = "${var.location}"
+    resource_group_name = "${data.azurerm_resource_group.RGapp.name}"
+    
+}
+
 # création du subnet 
 data "azurerm_subnet" "subnet_test" {
     name = "subnet_test"
