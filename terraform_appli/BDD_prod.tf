@@ -4,7 +4,7 @@
 resource "azurerm_network_security_group" "NSG_BDDprod" {
     name = "BDDNSG_prod"
     location = "${var.location}"
-    resource_group_name = "RG_project"
+    resource_group_name = "${azurerm_resource_group.RGapp.name}"
     
     security_rule {
         name                       = "SSH"
@@ -84,7 +84,7 @@ resource "azurerm_network_security_group" "NSG_BDDprod" {
 resource "azurerm_network_interface" "NIC_BDDprod" {
     name                      = "NIC_BDDprod"
     location                  = "${var.location}"
-    resource_group_name       = "RG_project"
+    resource_group_name       = "${azurerm_resource_group.RGapp.name}"
     network_security_group_id = "${azurerm_network_security_group.NSG_BDDprod.id}"   
 
     ip_configuration {
@@ -103,7 +103,7 @@ resource "azurerm_virtual_machine" "BDDprod" {
 
         name                  = "VMBDDprod"
         location              = "${var.location}"
-        resource_group_name   = "RG_project"
+        resource_group_name   = "${azurerm_resource_group.RGapp.name}"
         network_interface_ids = ["${azurerm_network_interface.NIC_BDDprod.id}"]
         vm_size               = "Standard_B1ms"
 
