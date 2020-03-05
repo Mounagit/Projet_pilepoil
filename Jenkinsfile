@@ -25,15 +25,21 @@ node('slave_jenkins') {
     docker.image('mounabal/terraform_12.21:terraform').inside() {
         //on recupere le git pour avoir nos fichiers Terraform    
         stage('git des fichiers Terraform dans une image Docker') {
-            git url: 'https://github.com/Mounagit/MamboNo5/terraform_appli.git'
+            git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
         }
         
-        stage('Copie des fichiers'){
-            sh "mv ./terraform/* ."
+        /* On récupère les fichiers situés dans le dossier terraform_appli
+        qui permettent le terraformage de notre serveur test
+        stage('Copie Terraform Test'){
+            sh "mv ./terraform_appli/* ."
+        }*/
+        
+        stage('Copie Terraform Test'){
+            sh "cd terraform_appli"
         }
         
         stage('Terraform Init & Plan'){
-                //on passe les fichiers de credential
+                //On init 
                 withCredentials([file(credentialsId: 'backend', variable: 'test')]) {
                 sh "terraform init"
                 sh "terraform plan -var 'env=toto' -var-file=\$test -out terraplante"
