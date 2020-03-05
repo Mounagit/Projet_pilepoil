@@ -41,25 +41,7 @@ node('slave_jenkins') {
         }
     
         // On passe à la partie Ansible
-        stage('Copie des fichiers Ansible dans Docker'){       
-            git url: 'https://gitlab.com/projet_final1/pile.git'
-            sh "mv ./terraform_appli/* ."
-        }
-        
-        
-        
-    }
-
-
- /*   // On utilise l'image Ansible que l'on a stocké sur le Dockerhub correspondant        
-    docker.image('mounabal/ansible_2.9.3:ansible').inside() {
-        //on recupere le git qui porte nos fichiers Ansible    
-        stage('git des fichiers Terraform dans une image Docker') {
-            git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
-        }
-        
-        // Utilisation d'Ansible 
-        stage('Deploiement Ansible') {
+   /*     stage('Deploiement Ansible') {
                 ansiblePlaybook (
                     colorized: true, 
                     become: true,
@@ -68,9 +50,9 @@ node('slave_jenkins') {
                     hostKeyChecking: false,
                     credentialsId: 'slave'
                 )
-        }
-        
-    } */
+        }*/
+
+    }
 
 }
 
