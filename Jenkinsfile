@@ -11,15 +11,15 @@ node('slave_jenkins') {
                
         // 
         stage('Terraform Init, Plan & Apply'){
-            withCredentials([file(credentialsId: 'backend', variable: 'test')]) {
+            withCredentials([file(credentialsId: 'backend', variable: 'LouBega')]) {
                 // On initialise
                 //sh "terraform init"
-                sh 'terraform plan -auto-approve -var-file=main.tfvars -var-file=$test -out=terraplante'
+                sh 'terraform plan -auto-approve -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
                 sh 'terraform apply terraplante'
             }
         }
 
-        // Récupération du projet corrigé sur notre git :
+        // Récupération du projet corrigé sur notre git
         stage('Clone du git du projet'){       
             git url: 'https://github.com/Mounagit/Code_Source.git'
         }
