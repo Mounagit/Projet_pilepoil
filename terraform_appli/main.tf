@@ -242,7 +242,7 @@ resource "azurerm_network_interface" "NIC_BDDtest" {
     name                      = "NIC_BDDtest"
     location                  = "${var.location}"
     resource_group_name       = "${data.azurerm_resource_group.RGapp.name}"
-    network_security_group_id = "${azurerm_network_security_group.NSG_test.id}"   
+    network_security_group_id = "${azurerm_network_security_group.NSG_BDDtest.id}"   
 
     ip_configuration {
         name                          = "IPconfBDDtest"
