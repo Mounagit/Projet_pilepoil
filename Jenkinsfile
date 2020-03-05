@@ -48,12 +48,12 @@ node('slave_jenkins') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
         }
  
-      // On passe à la partie Ansible
+      // On gère ensuite la partie Ansible
         stage('Deploiement Ansible') {
             ansiblePlaybook (
                 colorized: true, 
                 become: true,
-                playbook: 'ansible/playbook-prod.yml',
+                playbook: 'ansible/playbook.yml',
                 inventory: 'ansible/inventory.ini',
                 hostKeyChecking: false,
                 credentialsId: 'slave'
