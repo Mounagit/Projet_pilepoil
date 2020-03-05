@@ -6,16 +6,19 @@ node('slave_jenkins') {
         // On récupère le git qui contient les fichiers Terraform nécessaires au projet
         stage('Copie des fichiers Terraform dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
-            sh "mv ./terraform_appli/* ."
+        //    sh "mv ./terraform_appli/* ."
         }
                
         // On initialise, on planifie, on applique, après bien des aventures
         stage('Terraform Init, Plan & Apply'){
             withCredentials([file(credentialsId: 'backend', variable: 'LouBega')]) {
                 // On initialise
-                sh 'terraform init'
-                sh 'terraform plan -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
-                sh 'terraform apply terraplante'
+                sh """
+                cd terraform_appli
+                terraform init'
+                terraform plan -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
+                terraform apply terraplante
+                """
             }
         }
 
@@ -56,7 +59,7 @@ node('slave_jenkins') {
                 playbook: 'ansible/playbook.yml',
                 inventory: 'ansible/inventory.ini',
                 hostKeyChecking: false,
-                credentialsId: 'slave'
+                credentialsId: 'MounaSylvain'
             )
          }
     } 
