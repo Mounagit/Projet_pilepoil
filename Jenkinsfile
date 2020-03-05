@@ -54,6 +54,7 @@ node('slave_jenkins') {
         withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "ls -la ~/"
             sh "ls -la ~/home/${MounaSylvain}"
+            sh "mkdir /home/${MounaSylvain}/.ssh"
             sh "cat $key > /home/${MounaSylvain}/.ssh/klee"
             sh "chmod 400  /home/${MounaSylvain}/.ssh/klee"
         }
