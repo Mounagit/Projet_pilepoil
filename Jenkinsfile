@@ -36,13 +36,20 @@ node('slave_jenkins') {
     }
         
     stage('On récupère le tout en le poussant sur notre serveur') {
-        withCredentials([sshUserPrivateKey(credentialsId: 'slave_jenkins', keyFileVariable: 'Key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'slave_jenkins', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "scp -i \$key -o StrictHostKeyChecking=no target/restfulweb-1.0.0-SNAPSHOT.jar MounaSylvain@mounasylvain.francecentral.cloudapp.azure.com:/home/MounaSylvain"
         }  
     }
-    
-        // On passe à la partie Ansible
-   /*     stage('Deploiement Ansible') {
+
+    // On utilise l'image Terraform que l'on a stocké sur le Dockerhub correspondant
+    docker.image('mounabal/projetdevops:latest').inside() {
+        // On récupère le git qui contient les fichiers Terraform nécessaires au projet
+        stage('Copie des fichiers Terraform dans Docker') {
+            git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
+        }
+ 
+      // On passe à la partie Ansible
+        stage('Deploiement Ansible') {
                 ansiblePlaybook (
                     colorized: true, 
                     become: true,
@@ -51,7 +58,7 @@ node('slave_jenkins') {
                     hostKeyChecking: false,
                     credentialsId: 'slave'
                 )
-        }*/
+        }
     
     
     
