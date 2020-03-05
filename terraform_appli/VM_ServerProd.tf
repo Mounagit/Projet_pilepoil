@@ -4,7 +4,7 @@
 resource "azurerm_network_security_group" "NSG_prod" {
     name = "NSG_prod"
     location = "${var.location}"
-    resource_group_name = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name = "${data.azurerm_resource_group.RGapp.name}"
     
     security_rule {
         name                       = "SSH"
@@ -83,7 +83,7 @@ resource "azurerm_network_security_group" "NSG_prod" {
 resource "azurerm_public_ip" "IP_prod" {
     name                         = "IP_prod"
     location                     = "${var.location}"
-    resource_group_name          = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name          = "${data.azurerm_resource_group.RGapp.name}"
     allocation_method            = "Static"
     
 }
@@ -93,7 +93,7 @@ resource "azurerm_public_ip" "IP_prod" {
 resource "azurerm_network_interface" "NIC_prod" {
     name                      = "NIC_prod"
     location                  = "${var.location}"
-    resource_group_name       = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name       = "${data.azurerm_resource_group.RGapp.name}"
     network_security_group_id = "${azurerm_network_security_group.NSG_prod.id}"   
 
     ip_configuration {
@@ -112,7 +112,7 @@ resource "azurerm_virtual_machine" "prod" {
 
         name                  = "VMprod"
         location              = "${var.location}"
-        resource_group_name   = "${azurerm_resource_group.RGapp.name}"
+        resource_group_name   = "${data.azurerm_resource_group.RGapp.name}"
         network_interface_ids = ["${azurerm_network_interface.NIC_prod.id}"]
         vm_size               = "Standard_B1ms"
 
