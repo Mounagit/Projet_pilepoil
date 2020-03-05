@@ -46,7 +46,7 @@ node('slave_jenkins') {
 
     // On utilise l'image Terraform que l'on a stocké sur le Dockerhub correspondant
     // Il faut run en root pour avoir les droits pour pouvoir manipuler les fichiers critiques tel que .ssh
-    docker.image('mounabal/projetdevops:latest').inside('-u root') {
+    docker.image('mounabal/projetdevops:latest').inside("--net=host -u root") {
         // On récupère le git qui contient les fichiers Terraform nécessaires au projet
         stage('Copie des fichiers Terraform dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
