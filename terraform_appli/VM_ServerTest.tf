@@ -85,7 +85,7 @@ resource "azurerm_network_interface" "NIC_test" {
 
     ip_configuration {
         name                          = "IPconftest"
-        subnet_id                     = "${azurerm_subnet.subnet_test.id}"
+        subnet_id                     = "${data.azurerm_subnet.subnet_test.id}"
         private_ip_address_allocation = "Static"
         private_ip_address            = "10.0.3.17"
         public_ip_address_id          = "${azurerm_public_ip.IP_test.id}"
