@@ -130,7 +130,7 @@ resource "azurerm_virtual_machine" "Test" {
 
         name                  = "VMTest"
         location              = "${var.location}"
-        resource_group_name   = "${data.azurerm_resource_group.RGapp.name}"
+        resource_group_name   = "${azurerm_resource_group.RGapp.name}"
         network_interface_ids = ["${azurerm_network_interface.NIC_test.id}"]
         vm_size               = "Standard_B1ms"
 
@@ -260,7 +260,7 @@ resource "azurerm_virtual_machine" "BDDTest" {
 
         name                  = "VMBDDTest"
         location              = "${var.location}"
-        resource_group_name   = "${data.azurerm_resource_group.RGapp.name}"
+        resource_group_name   = "${azurerm_resource_group.RGapp.name}"
         network_interface_ids = ["${azurerm_network_interface.NIC_BDDtest.id}"]
         vm_size               = "Standard_B1ms"
 
