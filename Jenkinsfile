@@ -50,19 +50,14 @@ node('slave_jenkins') {
  
       // On passe à la partie Ansible
         stage('Deploiement Ansible') {
-                ansiblePlaybook (
-                    colorized: true, 
-                    become: true,
-                    playbook: 'ansible/playbook-prod.yml',
-                    inventory: 'ansible/inventory.ini',
-                    hostKeyChecking: false,
-                    credentialsId: 'slave'
-                )
-        }
-    
-    
-    
+            ansiblePlaybook (
+                colorized: true, 
+                become: true,
+                playbook: 'ansible/playbook-prod.yml',
+                inventory: 'ansible/inventory.ini',
+                hostKeyChecking: false,
+                credentialsId: 'slave'
+            )
+         }
+    } 
 }
-
-
-
