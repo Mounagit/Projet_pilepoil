@@ -98,7 +98,7 @@ resource "azurerm_network_interface" "NIC_prod" {
 
     ip_configuration {
         name                          = "ipconfprod"
-        subnet_id                     = "${azurerm_subnet.subnet_prod.id}"
+        subnet_id                     = "${data.azurerm_subnet.subnet_prod.id}"
         private_ip_address_allocation = "Static"
         private_ip_address            = "10.0.2.5"
         public_ip_address_id          = "${azurerm_public_ip.IP_prod.id}"
