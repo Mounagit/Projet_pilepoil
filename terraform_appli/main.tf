@@ -111,7 +111,7 @@ resource "azurerm_public_ip" "IP_test" {
 resource "azurerm_network_interface" "NIC_test" {
     name                      = "NIC_test"
     location                  = "${var.location}"
-    resource_group_name       = "${data.azurerm_resource_group.RGapp.name}"
+    resource_group_name       = "${azurerm_resource_group.RGapp.name}"
     network_security_group_id = "${azurerm_network_security_group.NSG_test.id}"   
 
     ip_configuration {
@@ -241,7 +241,7 @@ resource "azurerm_network_security_group" "NSG_BDDtest" {
 resource "azurerm_network_interface" "NIC_BDDtest" {
     name                      = "NIC_BDDtest"
     location                  = "${var.location}"
-    resource_group_name       = "${data.azurerm_resource_group.RGapp.name}"
+    resource_group_name       = "${azurerm_resource_group.RGapp.name}"
     network_security_group_id = "${azurerm_network_security_group.NSG_BDDtest.id}"   
 
     ip_configuration {
