@@ -53,9 +53,9 @@ node('slave_jenkins') {
  
         withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "ls -la ~/"
-            sh "ls -la ~/home"
-            sh "cat $key > ~/.ssh/klee"
-            sh "chmod 400  ~/.ssh/klee"
+            sh "ls -la ~/home/${MounaSylvain}"
+            sh "cat $key > /home/${MounaSylvain}/.ssh/klee"
+            sh "chmod 400  /home/${MounaSylvain}/.ssh/klee"
         }
         
       // On gère ensuite la partie Ansible
