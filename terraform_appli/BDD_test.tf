@@ -4,7 +4,7 @@
 resource "azurerm_network_security_group" "NSG_BDDtest" {
     name = "NSG_BDDtest"
     location = "${var.location}"
-    resource_group_name = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name = "${data.azurerm_resource_group.RGapp.name}"
     
     security_rule {
         name                       = "SSH"
@@ -71,7 +71,7 @@ resource "azurerm_network_security_group" "NSG_BDDtest" {
 resource "azurerm_network_interface" "NIC_BDDtest" {
     name                      = "NIC_BDDtest"
     location                  = "${var.location}"
-    resource_group_name       = "${azurerm_resource_group.RGapp.name}"
+    resource_group_name       = "${data.azurerm_resource_group.RGapp.name}"
     network_security_group_id = "${azurerm_network_security_group.NSG_test.id}"   
 
     ip_configuration {
@@ -90,7 +90,7 @@ resource "azurerm_virtual_machine" "BDDTest" {
 
         name                  = "VMBDDTest"
         location              = "${var.location}"
-        resource_group_name   = "${azurerm_resource_group.RGapp.name}"
+        resource_group_name   = "${data.azurerm_resource_group.RGapp.name}"
         network_interface_ids = ["${azurerm_network_interface.NIC_BDDtest.id}"]
         vm_size               = "Standard_B1ms"
 
