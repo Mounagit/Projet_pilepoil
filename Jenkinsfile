@@ -11,11 +11,11 @@ node('slave_jenkins') {
         sh "mvn clean package"
     }
 
- /*   stage('') {
+    stage('') {
         withCredentials([sshUserPrivateKey(credentialsId: 'slave_jenkins', keyFileVariable: 'Key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "scp -i \$key target/restfulweb-1.0.0-SNAPSHOT.jar MounaSylvain@52.143.140.140:/home/MounaSylvain"
         }
-    } */
+    }
 
     /* On utilise l'image Terraform que l'on a stocké sur le Dockerhub correspondant
     Pour résumer, notre chef d'ochestre donne l'ordre à son assistant d'aller dans l'atelier,
