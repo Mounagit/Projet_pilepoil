@@ -14,8 +14,8 @@ node('slave_jenkins') {
             withCredentials([file(credentialsId: 'backend', variable: 'LouBega')]) {
                 // On initialise
                 sh "terraform init"
-                sh 'terraform plan -auto-approve -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
-                sh 'terraform apply terraplante'
+                sh 'terraform plan -var-file=main.tfvars -var-file=$LouBega -out=terraplante'
+                sh 'terraform apply -auto-approve terraplante'
             }
         }
 
