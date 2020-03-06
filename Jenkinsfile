@@ -21,31 +21,31 @@ node('slave_jenkins') {
             }
         }
 
-        // Récupération du projet corrigé sur notre git
-        stage('Clone du git du projet'){       
-            git url: 'https://github.com/Mounagit/Code_Source.git'
+    // Récupération du projet corrigé sur notre git
+    stage('Clone du git du projet'){       
+        git url: 'https://github.com/Mounagit/Code_Source.git'
         } 
     }
 
     // Construction du jar avec Maven
-    stage('on clean avec maven') {
+    stage('Clean de Maven') {
         sh "mvn clean"
     }
     
     // On fait les tests en parallel comme demander dans le cahier des charges
     parallel('test1': {     
-        stage('on build avec maven le jar') {
+        stage('Build du jar avec maven - test1') {
             sh "mvn test"
         }
     },
     'test2': {
-        stage('on build avec maven le jar') {
+        stage('Build du jar avec maven - test2') {
             sh "mvn test"
         }
     }
     )
         
-    stage('on clean avec maven') {
+    stage('Package de Maven') {
             sh "mvn package"
     }
     
