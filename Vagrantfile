@@ -64,16 +64,17 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-  yum update
+  sudo yum update
   #installation d'ansible
-	yum -y install epel-release
+  yum -y install epel-release
   yum -y install python-pip
   pip install ansible
   ansible --version
   # installation des outils tree et net-tools
   yum -y install tree
   yum -y install net-tools
-  ansible-playbook /vagrant_data/ansible/ansible_tp-master/test.yml   
+  # installation de java8 et git
+  sudo yum install -y java-1.8.0-openjdk-devel git
    
   SHELL
 end
