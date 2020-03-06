@@ -1,6 +1,0 @@
----
-- hosts: localhost
-  become: yes
-  roles:
-    - java12
-    - mongo.db
