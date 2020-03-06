@@ -364,7 +364,7 @@ resource "azurerm_public_ip" "IP_prod" {
     location                     = "${var.location}"
     resource_group_name          = "${azurerm_resource_group.RGapp.name}"
     allocation_method            = "Static"
-    
+    domain_name_label            = "mounasylvainprod"
 }
 
 # création d'une carte reseau   
