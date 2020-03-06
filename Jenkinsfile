@@ -62,7 +62,7 @@ node('slave_jenkins') {
                 colorized: true, 
                 become: true,
                 playbook: 'ansible/playbook_slave.yml',
-                inventory: 'ansible/inventory.ini',
+                inventory: 'ansible/inventory',
                 hostKeyChecking: false,
                 credentialsId: 'MounaSylvain'
             )
