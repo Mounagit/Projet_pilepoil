@@ -36,16 +36,23 @@
    - enabled=1
    - gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
  
-#- name: mise à jour package
-#  yum: 
-#   name: '*'
-#   state: latest
-#   update_cache: yes
+- name: mise à jour package
+  yum: 
+   name: '*'
+   state: latest
+   update_cache: yes
   
 - name: install the mongodb-org meta-package
   yum: 
    name: mongodb-org
    state: present 
+
+# Démarrage de mongo
+- name: enable service
+  service: 
+    name: mongod
+    state: restarted
+    enabled: yes
 
 - mongodb_user:
    database: admin
@@ -84,12 +91,12 @@
    name: mongod
    enabled: yes
 
-#- name: Gestion du service
-#  systemd:
-#    daemon_reload: yes
+- name: Gestion du service
+  systemd:
+    daemon_reload: yes
 
-#- name: Restart du service pour tout prendre en compte
-#  service:
-#    name: restfulweb
-#    state: restarted
-#    enabled: yes
+- name: Restart du service pour tout prendre en compte
+  service:
+    name: restfulweb
+    state: restarted
+    enabled: yes
