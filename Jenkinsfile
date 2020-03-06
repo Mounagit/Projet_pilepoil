@@ -47,15 +47,15 @@ node('slave_jenkins') {
     // Il faut run en root pour avoir les droits pour pouvoir manipuler les fichiers critiques tel que .ssh
     docker.image('mounabal/projetdevops:latest').inside("--net=host -u root") {
         // On récupère le git qui contient les fichiers Terraform nécessaires au projet
-        stage('Copie des fichiers Terraform dans Docker') {
+        stage('Copie des fichiers Ansible dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
         }
         
-        // How to Setup SSH keys for “passwordless” ssh login in Linux
+ /*       // How to Setup SSH keys for “passwordless” ssh login in Linux
         withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "cat $key > ~/.ssh/klee"
             sh "chmod 400  ~/.ssh/klee"
-        }
+        }*/
         
       // On gère ensuite la partie Ansible
         stage('Deploiement Ansible') {
