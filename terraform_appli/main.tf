@@ -1,13 +1,10 @@
-
-
-# création du ressource group
+# Création du ressource group
 resource "azurerm_resource_group" "RGapp" {
     name = "${var.nameRG}"
     location = "${var.location}" 
 }
 
-# création du Azure Vnet 
-
+# Création du Azure Vnet 
 resource "azurerm_virtual_network" "my_AzureVnet" {
     name = "${var.nameVnet}" 
     address_space = [ "10.0.0.0/16" ]
@@ -16,7 +13,7 @@ resource "azurerm_virtual_network" "my_AzureVnet" {
     
 }
 
-# création du subnet 
+# Création du subnet 
 resource "azurerm_subnet" "subnet_test" {
     name = "subnet_test"
     resource_group_name = "${azurerm_resource_group.RGapp.name}"
@@ -25,13 +22,11 @@ resource "azurerm_subnet" "subnet_test" {
 }
 
 
-#############################
-####Création de la VM test
+################################
+#### Création de la VM test ####
+################################
 
-
-
-# creation du security group
-
+# Création du security group
 resource "azurerm_network_security_group" "NSG_test" {
     name = "NSG_test"
     location = "${var.location}"
@@ -47,11 +42,9 @@ resource "azurerm_network_security_group" "NSG_test" {
         destination_port_range     = "22"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
 
     security_rule {
-
         name                       = "HTTP"
         priority                   = 1002
         direction                  = "Inbound"
@@ -61,12 +54,10 @@ resource "azurerm_network_security_group" "NSG_test" {
         destination_port_range     = "80"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
 
 
     security_rule {
-
         name                       = "HTTPS"
         priority                   = 1003
         direction                  = "Inbound"
@@ -76,11 +67,9 @@ resource "azurerm_network_security_group" "NSG_test" {
         destination_port_range     = "443"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
 
     security_rule {
-
         name                       = "Mango"
         priority                   = 1004
         direction                  = "Inbound"
@@ -90,24 +79,21 @@ resource "azurerm_network_security_group" "NSG_test" {
         destination_port_range     = "27017"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
 
 }
 
 
 # creation d'une adresse IP Public
-
 resource "azurerm_public_ip" "IP_test" {
     name                         = "IP_test"
     location                     = "${var.location}"
     resource_group_name          = "${azurerm_resource_group.RGapp.name}"
     allocation_method            = "Static"
-    
+    domain_name_label            = "mounasylvaintest"
 }
 
 # création d'une carte reseau   
-
 resource "azurerm_network_interface" "NIC_test" {
     name                      = "NIC_test"
     location                  = "${var.location}"
@@ -124,10 +110,8 @@ resource "azurerm_network_interface" "NIC_test" {
 
 }
 
-# création de du serveur test
-
+# création du serveur test
 resource "azurerm_virtual_machine" "Test" {
-
         name                  = "VMTest"
         location              = "${var.location}"
         resource_group_name   = "${azurerm_resource_group.RGapp.name}"
@@ -139,14 +123,13 @@ resource "azurerm_virtual_machine" "Test" {
             caching           = "ReadWrite"
             create_option     = "FromImage"
             managed_disk_type = "Standard_LRS"
-
-    }
+       }
+ 
         storage_image_reference {
             publisher = "OpenLogic"
             offer     = "CentOS"
             sku       = "7.6"
             version   = "latest"
-
         }
         
         os_profile {
@@ -159,18 +142,17 @@ resource "azurerm_virtual_machine" "Test" {
             ssh_keys {
                 path     = "/home/MounaSylvain/.ssh/authorized_keys"
                 key_data = "${var.key_data}"
-
         }
 
     }
-
+    
 }
 
-############################
-#### creation de BDD TEST
+#############################
+#### creation de BDD TEST ###
+#############################
 
-# creation du security group
-
+# Creation du security group
 resource "azurerm_network_security_group" "NSG_BDDtest" {
     name = "NSG_BDDtest"
     location = "${var.location}"
@@ -186,11 +168,9 @@ resource "azurerm_network_security_group" "NSG_BDDtest" {
         destination_port_range     = "22"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
 
     security_rule {
-
         name                       = "HTTP"
         priority                   = 1002
         direction                  = "Inbound"
@@ -200,12 +180,10 @@ resource "azurerm_network_security_group" "NSG_BDDtest" {
         destination_port_range     = "80"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
 
 
     security_rule {
-
         name                       = "HTTPS"
         priority                   = 1003
         direction                  = "Inbound"
@@ -215,11 +193,9 @@ resource "azurerm_network_security_group" "NSG_BDDtest" {
         destination_port_range     = "443"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
 
     security_rule {
-
         name                       = "Mango"
         priority                   = 1004
         direction                  = "Inbound"
@@ -229,15 +205,12 @@ resource "azurerm_network_security_group" "NSG_BDDtest" {
         destination_port_range     = "27017"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
-
     }
+  
 }
 
 
-
-
-# création d'une carte reseau   
-
+# création d'une carte reseau
 resource "azurerm_network_interface" "NIC_BDDtest" {
     name                      = "NIC_BDDtest"
     location                  = "${var.location}"
@@ -254,10 +227,8 @@ resource "azurerm_network_interface" "NIC_BDDtest" {
 
 }
 
-# création de du serveur test
-
+# Création du serveur test
 resource "azurerm_virtual_machine" "BDDTest" {
-
         name                  = "VMBDDTest"
         location              = "${var.location}"
         resource_group_name   = "${azurerm_resource_group.RGapp.name}"
@@ -269,14 +240,13 @@ resource "azurerm_virtual_machine" "BDDTest" {
             caching           = "ReadWrite"
             create_option     = "FromImage"
             managed_disk_type = "Standard_LRS"
-
-    }
+        }
+    
         storage_image_reference {
             publisher = "OpenLogic"
             offer     = "CentOS"
             sku       = "7.6"
             version   = "latest"
-
         }
         
         os_profile {
