@@ -5,6 +5,14 @@
    path: /etc/yum.repos.d/mangodb.org.repo
    state: touch
 
+- name: installation de gcc et python devel
+  yum:
+    name:
+    - gcc
+    - python-devel
+    - python-setuptools
+    state: present
+
 - name: complete file
   lineinfile:
    path: /etc/yum.repos.d/mangodb.org.repo
