@@ -1,8 +1,6 @@
 ---
 # tasks file for mongo.db
 
-
-
 - name: create a repository
   file:
    path: /etc/yum.repos.d/mangodb.org.repo
