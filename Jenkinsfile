@@ -54,7 +54,7 @@ node('slave_jenkins') {
         archiveArtifacts 'target/*.jar'
     }
         
-    stage('On récupère le tout en le poussant sur notre serveur') {
+    stage('Récup du tout & Push sur notre serveur') {
         withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "scp -i \$key -o StrictHostKeyChecking=no target/restfulweb-1.0.0-SNAPSHOT.jar ${MounaSylvain}@mounasylvaintest.francecentral.cloudapp.azure.com:/home/MounaSylvain"
         }  
