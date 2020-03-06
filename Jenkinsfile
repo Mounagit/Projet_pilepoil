@@ -51,10 +51,10 @@ node('slave_jenkins') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
         }
  
-  /*      withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "cat $key > ~/.ssh/klee"
             sh "chmod 400  ~/.ssh/klee"
-        } */
+        }
         
       // On gère ensuite la partie Ansible
         stage('Deploiement Ansible') {
