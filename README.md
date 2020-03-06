@@ -22,11 +22,11 @@ Lien du repo : h3tr4d/projetdevops
 
 
 Installation :
-Description de la Plateforme d’Intégration Continue
+- Description de la Plateforme d’Intégration Continue
 
-Configuration de la connexion ssh.
-Une paire de clé ssh est générée sur la machine Vagrant afin d'établir une connexion entre les différentes VM qui seront créées.
-Création de script terraform
+- Configuration de la connexion ssh.
+Une paire de clé ssh est générée sur la machine Vagrant en exécutant la commande suivant : "$ ssh-keygen" afin d'établir une connexion entre les différentes VM qui seront créées. Les clés sont stockées dans le dossier .ssh, le fichier id_rsa correspondant à la clée privée et le fichier id_rsa.pub.
+/Création de script terraform
 Des scripts terraform sont créés afin de créer toute l’infrastructure. Les machines de la PIC ( Master et Slave) sont créées à partir du même ressource groupe dans un même Virtual Network (Vnet), et dans des subnets bien distincts. 
 Pour créer les machines Master Slave, stocker les fichiers terraform dans un même dosssier, et lancer les commandes suivantes :
  - $ terraform init
@@ -43,7 +43,8 @@ Job pipeline:
 Un Job pipeline a été effectué sur la Master Jenkins et buildé sur le Slave.
 Cette pipeline effectue les tâches suivantes :
 - dockerisation de l’image terraform stockée sur Dockerhub
-- clone du dépôt git https://github.com/Mounagit/Projet_pilepoil.git contenant les fichiers terraform essentiels à la création de VMcommandes shell permettant de créer les VM 
+- clone du dépôt git https://github.com/Mounagit/Projet_pilepoil.git contenant les fichiers terraform essentiels à la création de VM. 
+- commandes shell permettant de créer les VM 
 - récupération du code de l’application
 - build du code source avec maven 
 - lancement des tests Junit
@@ -56,17 +57,19 @@ Cette pipeline effectue les tâches suivantes :
 Démarrage :
 Connexion au serveur test : mounasylvaintest.francentral.cloudapp.azure.com/
 
+Résultat :
+Au 06/03/2020 à 16h59, notre pipeline jenkins est fonctionnel. Le code est fonctionnel et compil. Ceci étant nous n'arrivons pas encore à avoir une connexion. En effet, nous avons seulement effectué le travail sur le serveur test. Le déploiment sur le serveur prod est seulement un duplicata des étapes précédements effectuées sur la branche master.
 
 Fabriqué avec :
-Git/Github: Dépôt distant
-DockerHub: Bibliothèque d'images
-Ansible: Gestionnaire de configurations
-Docker: Outil permettant de créer des conteneurs
-Jenkins: Orchestrateur d'outils
-Maven : Gestionnaire des dépendances/Build
-Visual Studio Code: Editeur de code
-Vagrant : Création et la configuration des environnements de développement virtuel
-Microsoft Azure Cloud : Service de cloud computing 
+- Git/Github: Dépôt distant
+- DockerHub: Bibliothèque d'images
+- Ansible: Gestionnaire de configurations
+- Docker: Outil permettant de créer des conteneurs
+- Jenkins: Orchestrateur d'outils
+- Maven : Gestionnaire des dépendances/Build
+- Visual Studio Code: Editeur de code
+- Vagrant : Création et la configuration des environnements de développement virtuel
+- Microsoft Azure Cloud : Service de cloud computing 
 
 
 Versions :
