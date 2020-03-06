@@ -28,7 +28,7 @@ Installation :
 Une paire de clé ssh est générée sur la machine Vagrant en exécutant la commande suivant : "$ ssh-keygen" afin d'établir une connexion entre les différentes VM qui seront créées. Les clés sont stockées dans le dossier .ssh, le fichier id_rsa correspondant à la clée privée et le fichier id_rsa.pub.
 /Création de script terraform
 Des scripts terraform sont créés afin de créer toute l’infrastructure. Les machines de la PIC ( Master et Slave) sont créées à partir du même ressource groupe dans un même Virtual Network (Vnet), et dans des subnets bien distincts. 
-Pour créer les machines Master Slave, stocker les fichiers terraform dans un même dosssier, et lancer les commandes suivantes :
+Pour créer les machines Master Slave, stocker les fichiers terraform dans un même dosssier, et lancer le script shell projet.sh qui contient les commandes suivantes :
  - $ terraform init
  - $ terraform plan -var-file="main.tfvars" -var-file="backends.tfvars"
  - $ terraform apply -var-file="main.tfvars" -var-file="backends.tfvars"
