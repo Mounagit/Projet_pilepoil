@@ -36,18 +36,16 @@
    - enabled=1
    - gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
  
-- name: mise à jour package
-  yum: 
-   name: '*'
-   state: latest
-   update_cache: yes
+#- name: mise à jour package
+#  yum: 
+#   name: '*'
+#   state: latest
+#   update_cache: yes
   
 - name: install the mongodb-org meta-package
   yum: 
    name: mongodb-org
    state: present 
-  
-
 
 - mongodb_user:
    database: admin
