@@ -3,10 +3,4 @@
   become: yes
   roles: 
     - java12
-    - mongo.db
-   # - git
-   # - jenkins
-   # - terraform
-   # - maven
-   # - ansible
-   # - docker
+    - mongodb
