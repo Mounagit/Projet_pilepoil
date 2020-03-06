@@ -2,7 +2,7 @@
 node('slave_jenkins') {
 
     // On utilise l'image Terraform que l'on a stocké sur le Dockerhub correspondant
-    docker.image('mounabal/projetdevops:latest').inside() {
+    docker.image('h3tr4d/projetdevops:latest').inside() {
         // On récupère le git qui contient les fichiers Terraform nécessaires au projet
         stage('Copie des fichiers Terraform dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
@@ -46,7 +46,7 @@ node('slave_jenkins') {
     // On utilise l'image Terraform que l'on a stocké sur le Dockerhub correspondant
     // On se met en root pour avoir les droits pour pouvoir manipuler les fichiers critiques tel que .ssh
 //    docker.image('mounabal/projetdevops:latest').inside("--net=host -u root") {
-    docker.image('mounabal/projetdevops:latest').inside("-v /home/stage/workspace/projet:/tmp:rw -u 0") {
+    docker.image('h3tr4d/projetdevops:latest').inside("-v /home/stage/workspace/projet:/tmp:rw -u 0") {
         // On récupère le git qui contient les fichiers Terraform nécessaires au projet
         stage('Copie des fichiers Ansible dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
