@@ -1,1 +1,1 @@
-test ansible_host=mounasylvaintest.francecentral.cloudapp.azure.com ansible_port=22 ansible_user=MounaSylvain
+mongodbtest ansible_host=mounasylvaintest.francecentral.cloudapp.azure.com ansible_port=22 ansible_user=MounaSylvain
