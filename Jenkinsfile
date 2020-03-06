@@ -39,7 +39,7 @@ node('slave_jenkins') {
         
     stage('On récupère le tout en le poussant sur notre serveur') {
         withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
-            sh "scp -i $key -o StrictHostKeyChecking=no target/restfulweb-1.0.0-SNAPSHOT.jar ${MounaSylvain}@mounasylvain.francecentral.cloudapp.azure.com:/home/MounaSylvain"
+            sh "scp -i $key -o StrictHostKeyChecking=no target/restfulweb-1.0.0-SNAPSHOT.jar ${MounaSylvain}@mounasylvaintest.francecentral.cloudapp.azure.com:/home/MounaSylvain"
         }  
     }
 
@@ -50,7 +50,8 @@ node('slave_jenkins') {
         stage('Copie des fichiers Terraform dans Docker') {
             git url: 'https://github.com/Mounagit/Projet_pilepoil.git'
         }
- 
+        
+        // How to Setup SSH keys for “passwordless” ssh login in Linux
         withCredentials([sshUserPrivateKey(credentialsId: 'MounaSylvain', keyFileVariable: 'key', passphraseVariable: '', usernameVariable: 'MounaSylvain')]) {
             sh "cat $key > ~/.ssh/klee"
             sh "chmod 400  ~/.ssh/klee"
