@@ -26,7 +26,7 @@ Installation :
 
 - Configuration de la connexion ssh.
 Une paire de clé ssh est générée sur la machine Vagrant en exécutant la commande suivant : "$ ssh-keygen" afin d'établir une connexion entre les différentes VM qui seront créées. Les clés sont stockées dans le dossier .ssh, le fichier id_rsa correspondant à la clée privée et le fichier id_rsa.pub.
-/Création de script terraform
+- Création de script terraform
 Des scripts terraform sont créés afin de créer toute l’infrastructure. Les machines de la PIC ( Master et Slave) sont créées à partir du même ressource groupe dans un même Virtual Network (Vnet), et dans des subnets bien distincts. 
 Pour créer les machines Master Slave, stocker les fichiers terraform dans un même dosssier, et lancer le script shell projet.sh qui contient les commandes suivantes :
  - $ terraform init
@@ -34,10 +34,11 @@ Pour créer les machines Master Slave, stocker les fichiers terraform dans un m�
  - $ terraform apply -var-file="main.tfvars" -var-file="backends.tfvars"
  
 Création de rôles ansible :
-Tous les rôles sont stockés dans le dossier ansible de ce repo github. Les playbooks sont lancés depuis la machine Vagrant afin d’approvisionner les VM de la PIC et de la pile complète. La commande est la suivante : “ansible-playbook playbook.yml -i inventory”.
+Tous les rôles sont stockés dans le dossier ansible de ce repo github. Les playbooks sont lancés depuis la machine Vagrant afin d’approvisionner les VM de la PIC et de la pile complète. 
+La commande est la suivante permet de provisionner la machine Master: “ansible-playbook playbook_master.yml -i inventory” et la commande suivante “ansible-playbook playbook_slave.yml -i inventory”.
 
 Description de la pile complète :
-Les machines de la pile complète sont créées à partir d’un même ressource groupe, dans un même Vnet et dans deux subnets distincts englobant chacun le serveur et sa base de données.  Les machines de la pile complète sont également provisionnées par des rôles ansible.
+Les machines de la pile complète sont créées à partir d’un même ressource groupe, dans un même Vnet et dans deux subnets distincts englobant chacun le serveur et sa base de données.  Les machines de la pile complète sont également provisionnées par des rôles ansible avec la commande suivante : “ansible-playbook playbook_test.yml -i inventory”
 
 Job pipeline: 
 Un Job pipeline a été effectué sur la Master Jenkins et buildé sur le Slave.
