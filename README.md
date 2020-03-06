@@ -28,8 +28,11 @@ Configuration de la connexion ssh.
 Une paire de clé ssh est générée sur la machine Vagrant afin d'établir une connexion entre les différentes VM qui seront créées.
 Création de script terraform
 Des scripts terraform sont créés afin de créer toute l’infrastructure. Les machines de la PIC ( Master et Slave) sont créées à partir du même ressource groupe dans un même Virtual Network (Vnet), et dans des subnets bien distincts. 
-
-
+Pour créer les machines Master Slave, stocker les fichiers terraform dans un même dosssier, et lancer les commandes suivantes :
+ - $ terraform init
+ - $ terraform plan -var-file="main.tfvars" -var-file="backends.tfvars"
+ - $ terraform apply -var-file="main.tfvars" -var-file="backends.tfvars"
+ 
 Création de rôles ansible :
 Tous les rôles sont stockés dans le dossier ansible de ce repo github. Les playbooks sont lancés depuis la machine Vagrant afin d’approvisionner les VM de la PIC et de la pile complète. La commande est la suivante : “ansible-playbook playbook.yml -i inventory”.
 
