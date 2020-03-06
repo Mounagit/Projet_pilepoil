@@ -1,13 +1,20 @@
 ---
 # tasks file for java12
 
+- name: check if java exists
+  stat: path=/usr/bin/java
+  register: foo
+
 - name: install wget
-  yum :
-   name: wget
-   state: present
+  yum:
+    name: wget
+    state: present
+  when: foo.stat.islnk is not defined
 
 - name: download jdk12
   shell: wget https://mirrors.huaweicloud.com/java/jdk/12.0.1+12/jdk-12.0.1_linux-x64_bin.rpm
-
-- name: install jdk 12
+  when: foo.stat.islnk is not defined
+  
+- name: install jdk12
   shell: rpm -Uh jdk-12.0.1_linux-x64_bin.rpm
+  when: foo.stat.islnk is not defined
