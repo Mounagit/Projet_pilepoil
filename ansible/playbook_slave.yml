@@ -1,6 +1,0 @@
----
-- hosts: mongodbtest
-  become: yes
-  roles: 
-    - java12
-    - mongo.db
