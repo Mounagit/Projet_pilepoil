@@ -1,0 +1,6 @@
+---
+- hosts: mongodbprod
+  become: yes
+  roles: 
+    - java12
+    - mongo.db
