@@ -14,12 +14,12 @@
     - python-setuptools
     state: present
 
-- name: install de pymongo
+- name: installation de pymongo
   easy_install:
     name: pymongo
     state: present
 
-- name: accept remote connection
+- name: connection remote via mongod.conf
   template:
     src: mongod.conf
     dest: /etc/mongod.conf
@@ -59,3 +59,28 @@
    password: w32jjYdMZr
    roles: readWrite
    state: present
+
+- name: create file service restfulweb
+  file:
+    path: /etc/systemd/system/restfulweb.service
+    state: touch
+
+- name: Config du fichier restfulweb.service
+  blockinfile:
+    path: /etc/systemd/system/restfulweb.service
+    state: present
+    block: |
+      [Unit]
+      Description=restfulweb Daemon
+      After=network.target
+      [Service]
+      Environment=MONGO_DB=customers
+      Environment=MONGO_ADMIN=utilisateur
+      Environment=MONGO_PWD=54321
+      Environment=MONGO_URL=10.0.1.5
+      Environment=MONGO_PORT=27017
+      Type=simple
+      ExecStart=/opt/jdk-12.0.1/bin/java -jar /home/jpr/restfulweb-1.0.0-SNAPSHOT.jar
+      [Install]
+      WantedBy=multi-user.target
+
