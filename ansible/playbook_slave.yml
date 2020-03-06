@@ -1,5 +1,5 @@
 ---
-- hosts: slave
+- hosts: slave_jenkins
   become: yes
   roles: 
     - java12
