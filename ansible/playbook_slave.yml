@@ -1,5 +1,5 @@
 ---
-- hosts: slave_jenkins
+- hosts: mongodbtest
   become: yes
   roles: 
     - java12
