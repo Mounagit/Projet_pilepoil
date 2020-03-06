@@ -75,6 +75,17 @@ Vagrant.configure("2") do |config|
   yum -y install net-tools
   # installation de java8 et git
   sudo yum install -y java-1.8.0-openjdk-devel git
-   
-  SHELL
+  sudo yum install wget unzip
+  sudo wget https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
+  sudo unzip ./terraform_0.12.2_linux_amd64.zip –d /usr/local/bin
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+  sudo sh -c 'echo -e "[azure-cli]
+  name=Azure CLI
+  baseurl=https://packages.microsoft.com/yumrepos/azure-cli
+  enabled=1
+  gpgcheck=1
+  gpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+  sudo yum install azure-cli
+
+SHELL
 end
