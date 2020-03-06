@@ -1,11 +1,5 @@
 ---
 # tasks file for mongo.db
-
-- name: supprimer mongo present
-  yum:
-   name: mongo
-   state: absent
-
 - name: create a repository
   file:
    path: /etc/yum.repos.d/mangodb.org.repo
@@ -28,7 +22,6 @@
    name: '*'
    state: latest
    update_cache: yes
-
   
 - name: install the mongodb-org meta-package
   yum: 
@@ -48,11 +41,3 @@
    roles: readWrite
    state: present
 
-
-
-
-
-
-
-    
-   
