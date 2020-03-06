@@ -28,10 +28,27 @@ node('slave_jenkins') {
     }
 
     // Construction du jar avec Maven
-    stage('Build jar code source') {
-        sh "mvn clean package"
+    stage('on clean avec maven') {
+        sh "mvn clean"
     }
+    
+    // On fait les tests en parallel comme demander dans le cahier des charges
+    parallel('test1': {     
+        stage('on build avec maven le jar') {
+            sh "mvn test"
+        }
+    },
+    'test2': {
+        stage('on build avec maven le jar') {
+            sh "mvn test"
+        }
+    }
+    )
         
+    stage('on clean avec maven') {
+            sh "mvn package"
+    }
+    
     stage('On lance les tests Junit sur le jar') {
         junit '**/target/surefire-reports/TEST-*.xml'
         archiveArtifacts 'target/*.jar'
