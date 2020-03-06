@@ -47,11 +47,7 @@
    name: mongodb-org
    state: present 
   
-- name: systemctl start mongod
-  systemd:
-   state: restarted
-   name: mongod
-   enabled: yes
+
 
 - mongodb_user:
    database: admin
@@ -84,12 +80,18 @@
       [Install]
       WantedBy=multi-user.target
 
-- name: Gestion du service
+- name: systemctl start mongod
   systemd:
-    daemon_reload: yes
+   state: restarted
+   name: mongod
+   enabled: yes
 
-- name: Restart du service pour tout prendre en compte
-  service:
-    name: restfulweb
-    state: restarted
-    enabled: yes
+#- name: Gestion du service
+#  systemd:
+#    daemon_reload: yes
+
+#- name: Restart du service pour tout prendre en compte
+#  service:
+#    name: restfulweb
+#    state: restarted
+#    enabled: yes
