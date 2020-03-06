@@ -1,5 +1,8 @@
 ---
 # tasks file for mongo.db
+
+
+
 - name: create a repository
   file:
    path: /etc/yum.repos.d/mangodb.org.repo
@@ -11,6 +14,11 @@
     - gcc
     - python-devel
     - python-setuptools
+    state: present
+
+- name: install de pymongo
+  easy_install:
+    name: pymongo
     state: present
 
 - name: complete file
