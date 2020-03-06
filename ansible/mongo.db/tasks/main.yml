@@ -19,6 +19,11 @@
     name: pymongo
     state: present
 
+- name: accept remote connection
+  template:
+    src: mongod.conf
+    dest: /etc/mongod.conf
+
 - name: complete file
   lineinfile:
    path: /etc/yum.repos.d/mangodb.org.repo
