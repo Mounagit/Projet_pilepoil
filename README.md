@@ -1,6 +1,5 @@
-###########################################################
-Dev d'une pile complète de déploiement continu via une PIC
-###########################################################
+Développement d'une pile complète de déploiement continu via une PIC as code
+
 
 Ce projet traite du déploiement d'une plateforme d'intégration continue (PIC) tout en intégrant des outils de CI/CD.
 Le but est de développer une pile complète de déploiement continue permettant de livrer sur différents environnements techniques de l’entreprise cible : test et production.
