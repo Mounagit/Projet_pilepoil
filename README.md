@@ -1,20 +1,18 @@
 ###########################################################
-###                   Projet Mambo No. 5                ###
-###                    Pourquoi ce nom ?                ###
-### Parce qu'il s'agit du 5ème Projet du groupe Mambo ! ###
+###                   Projet Pile Poil                  ###
 ###########################################################
 
 Ce projet traite du déploiement d'une plateforme d'intégration continue (PIC) tout en intégrant des outils de CI/CD. Le but est de développer une pile complète de déploiement continue permettant de livrer sur différents environnements techniques de l’entreprise : test et production.
 Toute l'infrastructure sera créée avec des ressources sur le Cloud Azure.
 La PIC est constituée d’une machine Master, où Jenkins, Git et Java seront installés, et d’une machine Slave rattachée à la machine Master par une connexion ssh, où Java8, Java12, Git, Terraform, Maven, Ansible et Docker seront installés.
-La pile complète est constituée de Serveurs Test et Prod ainsi que de deux bases de données (BDD), MongoDB.
+La pile complète est constituée de 2 Serveurs, Test et Prod, ainsi que de deux bases de données MongoDB.
 
 Pré-requis :
 Installer VirtualBox et Vagrant sur votre poste de travail.
 La machine virtuelle est configurée à partir d'un Vagrantfile.
 Pour ce faire, lancer les commandes "vagrant up" et “vagrant ssh” afin de créer et de se connecter à la machine.
 Installations requises : Java8, Git, Terraform/Azure-cli, Ansible.
-L’infrastructure étant choisi avec des ressources sur le Cloud Azure, il faut donc se créer un compte Azur Microsoft.
+L’infrastructure étant choisi avec des ressources sur le Cloud Azure, il faut donc posséder un compte Azure Microsoft.
 Créer un Repository Github qui permettra de stocker tous les fichiers de configuration/installation : scripts terraform, le dockerfile pour le build d’image, le jenkinsfile, le Vagrantfile ainsi que les rôles ansible qui permettront le provisionning des VM.
 Lien du repo : https://github.com/Mounagit/Projet_pilepoil.git
 Créer un Repository DockerHub pour y stocker les images terraform et ansible.
@@ -27,7 +25,7 @@ Installation :
 - Configuration de la connexion ssh.
 Une paire de clé ssh est générée sur la machine Vagrant en exécutant la commande suivant : "$ ssh-keygen" afin d'établir une connexion entre les différentes VM qui seront créées. Les clés sont stockées dans le dossier .ssh, le fichier id_rsa correspondant à la clée privée et le fichier id_rsa.pub.
 - Création de script terraform
-Des scripts terraform sont créés afin de créer toute l’infrastructure. Les machines de la PIC ( Master et Slave) sont créées à partir du même ressource groupe dans un même Virtual Network (Vnet), et dans des subnets bien distincts. 
+Des scripts terraform sont créés afin de créer toute l’infrastructure. Les machines de la PIC (Master et Slave) sont créées à partir du même ressource groupe dans un même Virtual Network (Vnet), et dans des subnets bien distincts. 
 Pour créer les machines Master Slave, stocker les fichiers terraform dans un même dosssier, et lancer le script shell projet.sh qui contient les commandes suivantes :
  - $ terraform init
  - $ terraform plan -var-file="main.tfvars" -var-file="backends.tfvars"
@@ -59,7 +57,10 @@ Démarrage :
 Connexion au serveur test : mounasylvaintest.francentral.cloudapp.azure.com/
 
 Résultat :
-Au 06/03/2020 à 16h59, notre pipeline jenkins est fonctionnel. Le code est fonctionnel et compil. Ceci étant nous n'arrivons pas encore à avoir une connexion. En effet, nous avons seulement effectué le travail sur le serveur test. Le déploiment sur le serveur prod est seulement un duplicata des étapes précédements effectuées sur la branche master.
+Le pipeline jenkins est fonctionnel.
+Le code est fonctionnel et compile.
+Les seveurs test et pro sont fonctionnels.
+Les accès aux bases MongoDB Test et Prod sont opérationnels.
 
 Fabriqué avec :
 - Git/Github: Dépôt distant
@@ -69,7 +70,7 @@ Fabriqué avec :
 - Jenkins: Orchestrateur d'outils
 - Maven : Gestionnaire des dépendances/Build
 - Visual Studio Code: Editeur de code
-- Vagrant : Création et la configuration des environnements de développement virtuel
+- Vagrant : Création et configuration des environnements de développement virtuel
 - Microsoft Azure Cloud : Service de cloud computing 
 
 
