@@ -2,7 +2,8 @@
 ###                   Projet Pile Poil                  ###
 ###########################################################
 
-Ce projet traite du déploiement d'une plateforme d'intégration continue (PIC) tout en intégrant des outils de CI/CD. Le but est de développer une pile complète de déploiement continue permettant de livrer sur différents environnements techniques de l’entreprise : test et production.
+Ce projet traite du déploiement d'une plateforme d'intégration continue (PIC) tout en intégrant des outils de CI/CD.
+Le but est de développer une pile complète de déploiement continue permettant de livrer sur différents environnements techniques de l’entreprise cible : test et production.
 Toute l'infrastructure sera créée avec des ressources sur le Cloud Azure.
 La PIC est constituée d’une machine Master, où Jenkins, Git et Java seront installés, et d’une machine Slave rattachée à la machine Master par une connexion ssh, où Java8, Java12, Git, Terraform, Maven, Ansible et Docker seront installés.
 La pile complète est constituée de 2 Serveurs, Test et Prod, ainsi que de deux bases de données MongoDB.
