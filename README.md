@@ -1,5 +1,5 @@
 ###########################################################
-###                   Projet Pile Poil                  ###
+Dev d'une pile complète de déploiement continu via une PIC
 ###########################################################
 
 Ce projet traite du déploiement d'une plateforme d'intégration continue (PIC) tout en intégrant des outils de CI/CD.
